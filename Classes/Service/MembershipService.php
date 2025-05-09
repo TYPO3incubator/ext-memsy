@@ -307,6 +307,7 @@ final class MembershipService
             $member->setMembershipStatus(MembershipStatus::Inactive);
             $member->setDisabled(true);
             $this->memberRepository->update($member);
+            $this->paymentService->cancelPendingPayments($member);
         }
         $this->persistenceManager->persistAll();
     }
