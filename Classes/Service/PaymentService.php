@@ -6,10 +6,17 @@ namespace TYPO3Incubator\Memsy\Service;
 
 use Digitick\Sepa\Exception\InvalidArgumentException;
 use Doctrine\DBAL\Exception;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\Exception\ValidationException;
+use Endroid\QrCode\RoundBlockSizeMode;
+use Endroid\QrCode\Writer\PngWriter;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
+use SepaQr\Data;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
@@ -314,5 +321,45 @@ final class PaymentService
             $this->persistenceManager->update($payment);
         }
         $this->persistenceManager->persistAll();
+    }
+
+    /**
+     * @throws \SepaQr\Exception
+     * @throws ValidationException
+     */
+    public function generateSepaBankTransferQrCode(Member $member): string
+    {
+        if (!$member->getMembership()) {
+            return '';
+        }
+
+        /** @var Site $site */
+        $site = $this->request->getAttribute('site');
+        $siteSettings = $site->getSettings();
+
+        $organizationName = $siteSettings->get('memberManagement.organization.name');
+        $organizationIban = $siteSettings->get('memberManagement.organization.paymentInformation.iban');
+        $organizationBic = $siteSettings->get('memberManagement.organization.paymentInformation.bic');
+
+        $paymentData = Data::create()
+            ->setName($organizationName)
+            ->setIban($organizationIban)
+            ->setBic($organizationBic)
+            ->setCurrency('EUR')
+            ->setAmount($member->getMembership()?->getPrice());
+
+        $qrBuilder = new Builder(
+            writer: new PngWriter(),
+            writerOptions: [],
+            validateResult: false,
+            data: $paymentData,
+            encoding: new Encoding('UTF-8'),
+            errorCorrectionLevel: ErrorCorrectionLevel::High,
+            size: 300,
+            margin: 10,
+            roundBlockSizeMode: RoundBlockSizeMode::Margin,
+        );
+
+        return $qrBuilder->build()->getDataUri();
     }
 }
