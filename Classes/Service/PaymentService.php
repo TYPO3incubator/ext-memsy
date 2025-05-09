@@ -82,7 +82,12 @@ final class PaymentService
             $dueBy = $lastPayment->getDueBy();
 
             // Send "reminder" mail if not done yet
+            // TODO: why does it not go into here (reminderinterval????)
             if ($member->getIban() === '' && $dueBy !== null && (clone $dueBy)->sub($reminderInterval)->getTimestamp() < time()) {
+                /** @var PaymentService $paymentService */
+                $paymentService = GeneralUtility::makeInstance(PaymentService::class);
+                $sepaBankTransferQrCode = $paymentService->generateSepaBankTransferQrCode($member);
+
                 $email = $this->emailService->createEmail(
                     'PaymentReminder',
                     'LLL:EXT:memsy/Resources/Private/Language/locallang.xlf:email.paymentReminder.subject',
@@ -90,6 +95,7 @@ final class PaymentService
                 );
                 $email->assign('payment', $lastPayment);
                 $email->assign('sitesets', $site->getSettings()->getAll());
+                $email->assign('sepaBankTransferQrCodeBase64Image', $sepaBankTransferQrCode);
 
                 try {
                     $this->emailService->sendEmail($email);
