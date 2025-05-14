@@ -1,0 +1,23 @@
+name: typo3-incubator/memsy/member-management
+label: 'EXT:memsy Member Management'
+settings:
+  memsy:
+    storage:
+      membershipsFolderPid: 0
+      paymentsFolderPid: 0
+    organization:
+      name: ''
+      personInCharge: ''
+      emailOfPersonInCharge: ''
+      defaultUsergroup: 1
+      address:
+        streetAndHouseNumber: ''
+        city: ''
+        zip: ''
+        country: ''
+      paymentInformation:
+        iban: ''
+        bic: ''
+        sepaCreditorId: ''
+        paymentReason: ''
+        paymentDueMonth: ''

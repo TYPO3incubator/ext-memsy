@@ -1,0 +1,17 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  TYPO3Incubator\Memsy\:
+    resource: '../Classes/*'
+    exclude:
+      - '../Classes/Domain/Model/*'
+
+  TYPO3\CMS\Extbase\Validation\Validator\GenericObjectValidator:
+    alias: 'TYPO3Incubator\Memsy\Domain\Validator\MemberObjectValidator'
+    public: true
+
+  TYPO3Incubator\Memsy\TCA\TypeMembershipItemsProcFunc:
+    public: true

@@ -12,7 +12,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests/specs',
+  testDir: './Tests/Playwright/specs',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -25,8 +25,7 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* SurfCamp */
-    baseURL: 'https://surfcamp-base-2025-bootstrap.ddev.site',
+    baseURL: 'https://typo3-ext-memsy.ddev.site',
 
     // Workaround for net::ERR_CERT_AUTHORITY_INVALID in DDEV
     ignoreHTTPSErrors: true,

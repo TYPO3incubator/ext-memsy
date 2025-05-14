@@ -1,0 +1,24 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="SystemEmail" />
+
+<f:section name="Title">
+    <f:translate key="LLL:EXT:memsy/Resources/Private/Language/locallang.xlf:email.paymentReminder.title" />
+</f:section>
+
+<f:section name="Main">
+    <p>
+        <f:translate key="email.main.salutation" arguments="{0: '{member.firstName} {member.lastName}'}" />,
+    </p>
+
+    <p>
+        <f:translate key="email.paymentReminder.main.body"/><br/>
+        <f:translate key="payment-reason"/>: {sitesets.memsy.organization.paymentInformation.paymentReason}<br/>
+        <f:translate key="payment-amount"/>: {member.membership.price -> f:format.currency(currencySign: '€')}<br/>
+        <f:translate key="iban"/>: {sitesets.memsy.organization.paymentInformation.iban}<br/>
+        <f:translate key="bic"/>: {sitesets.memsy.organization.paymentInformation.bic}
+    </p>
+</f:section>
+
+</html>

@@ -1,18 +1,15 @@
-/bin/
+/config/
 /public/
 /var/
 /vendor/
-/typo3_core/
 *.idea
 *.project
 *.vscode
-.env
 .DS_Store
 .history
 /node_modules/*
 
 # Playwright
-node_modules/
 /test-results/
 /playwright-report/
 /blob-report/

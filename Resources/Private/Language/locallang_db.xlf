@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" original="messages" datatype="plaintext" date="2025-05-06T10:31:49+01:00">
+        <header></header>
+        <body>
+            <trans-unit id="fe_users.bic">
+                <source>BIC</source>
+            </trans-unit>
+            <trans-unit id="fe_users.sepa_debtor_mandate">
+                <source>SEPA mandate number</source>
+            </trans-unit>
+            <trans-unit id="fe_users.sepa_debtor_mandate_sign_date">
+                <source>SEPA mandate sign date</source>
+            </trans-unit>
+            <trans-unit id="fe_users.date_of_birth">
+                <source>Date of birth</source>
+            </trans-unit>
+            <trans-unit id="fe_users.gender">
+                <source>Gender</source>
+            </trans-unit>
+            <trans-unit id="fe_users.gender.female">
+                <source>Female</source>
+            </trans-unit>
+            <trans-unit id="fe_users.gender.male">
+                <source>Male</source>
+            </trans-unit>
+            <trans-unit id="fe_users.gender.other">
+                <source>Other</source>
+            </trans-unit>
+            <trans-unit id="fe_users.iban">
+                <source>IBAN</source>
+            </trans-unit>
+            <trans-unit id="fe_users.sepa_accepted_at">
+                <source>SEPA direct debit accepted on</source>
+            </trans-unit>
+            <trans-unit id="fe_users.member_since">
+                <source>Member since</source>
+            </trans-unit>
+            <trans-unit id="fe_users.member_until">
+                <source>Member until</source>
+            </trans-unit>
+            <trans-unit id="fe_users.membership">
+                <source>Membership</source>
+            </trans-unit>
+            <trans-unit id="fe_users.membership_status">
+                <source>Membership status</source>
+            </trans-unit>
+            <trans-unit id="fe_users.membership_status.active">
+                <source>Active</source>
+            </trans-unit>
+            <trans-unit id="fe_users.membership_status.inactive">
+                <source>Inactive</source>
+            </trans-unit>
+            <trans-unit id="fe_users.membership_status.pending">
+                <source>Pending</source>
+            </trans-unit>
+            <trans-unit id="fe_users.membership_status.unconfirmed">
+                <source>Unconfirmed</source>
+            </trans-unit>
+            <trans-unit id="fe_users.notes">
+                <source>Notes</source>
+            </trans-unit>
+            <trans-unit id="fe_users.payments">
+                <source>Payments</source>
+            </trans-unit>
+            <trans-unit id="fe_users.privacy_accepted_at">
+                <source>Privacy terms accepted on</source>
+            </trans-unit>
+            <trans-unit id="fe_users.tx_extbase_type.tx_memsy_member">
+                <source>Member</source>
+            </trans-unit>
+            <trans-unit id="fe_users.tx_extbase_type.tx_memsy_member.member">
+                <source>Member</source>
+            </trans-unit>
+            <trans-unit id="plugins.create_membership.description">
+                <source>Insert plugin that includes a form to create a new membership.</source>
+            </trans-unit>
+            <trans-unit id="plugins.create_membership.title">
+                <source>Create Membership</source>
+            </trans-unit>
+            <trans-unit id="plugins.confirm_membership.description">
+                <source>Insert plugin to confirm a new membership.</source>
+            </trans-unit>
+            <trans-unit id="plugins.confirm_membership.title">
+                <source>Confirm Membership</source>
+            </trans-unit>
+            <trans-unit id="plugins.membership_settings.description">
+                <source>Change settings of a member</source>
+            </trans-unit>
+            <trans-unit id="plugins.membership_settings.title">
+                <source>Membership Settings</source>
+            </trans-unit>
+            <trans-unit id="tx_memsy_domain_model_membership">
+                <source>Membership</source>
+            </trans-unit>
+            <trans-unit id="tx_memsy_domain_model_membership.description">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_memsy_domain_model_membership.price">
+                <source>Price</source>
+            </trans-unit>
+            <trans-unit id="tx_memsy_domain_model_membership.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="tx_memsy_domain_model_payment">
+                <source>Payment</source>
+            </trans-unit>
+            <trans-unit id="tx_memsy_domain_model_payment.amount">
+                <source>Amount</source>
+            </trans-unit>
+            <trans-unit id="tx_memsy_domain_model_payment.member">
+                <source>Member</source>
+            </trans-unit>
+            <trans-unit id="tx_memsy_domain_model_payment.paid_at">
+                <source>Paid at</source>
+            </trans-unit>
+            <trans-unit id="tx_memsy_domain_model_payment.due_by">
+                <source>Due by</source>
+            </trans-unit>
+            <trans-unit id="tx_memsy_domain_model_payment.state">
+                <source>Payment state</source>
+            </trans-unit>
+            <trans-unit id="tx_memsy_domain_model_payment.state.pending">
+                <source>Pending</source>
+            </trans-unit>
+            <trans-unit id="tx_memsy_domain_model_payment.state.paid">
+                <source>Paid</source>
+            </trans-unit>
+            <trans-unit id="tx_memsy_domain_model_payment.state.cancelled">
+                <source>Cancelled</source>
+            </trans-unit>
+            <trans-unit id="tx_memsy_domain_model_payment.reminder_mail_sent_at">
+                <source>"Reminder" mail sent at</source>
+            </trans-unit>
+
+            <trans-unit id="tt_content.bodytext.memsy_createmember">
+                <source>Privacy policy statement</source>
+            </trans-unit>
+            <trans-unit id="tt_content.tx_memsy_confirmation_pid">
+                <source>Confirmation page</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -1,7 +1,0 @@
-@import './PageTsConfig/BackendLayouts/'
-
-RTE {
-    default {
-        preset = surfcamp_base
-    }
-}

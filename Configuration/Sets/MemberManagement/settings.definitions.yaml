@@ -1,0 +1,121 @@
+categories:
+  Memsy:
+    label: 'EXT:memsy Member Management'
+  Memsy.storage:
+    label: 'Storage Folders'
+    parent: Memsy
+  Memsy.organization:
+    label: 'Organization'
+    parent: Memsy
+  Memsy.organization.address:
+    label: 'Organization address'
+    parent: Memsy.organization
+  Memsy.organization.paymentInformation:
+    label: 'Payment information'
+    parent: Memsy.organization
+
+settings:
+  memsy.storage.membershipsFolderPid:
+    label: 'Memberships folder PID'
+    category: Memsy.storage
+    type: int
+    default: 0
+  memsy.storage.paymentsFolderPid:
+    label: 'Payments folder PID'
+    category: Memsy.storage
+    type: int
+    default: 0
+  memsy.organization.name:
+    label: 'Organization name'
+    category: Memsy.organization
+    type: string
+    default: ''
+  memsy.organization.personInCharge:
+    label: 'Person in charge'
+    category: Memsy.organization
+    type: string
+    default: ''
+  memsy.organization.emailOfPersonInCharge:
+    label: 'E-Mail of person in charge'
+    category: Memsy.organization
+    type: string
+    default: ''
+  memsy.organization.defaultCountry:
+    label: 'Default country for member registration'
+    description: 'Please use a country code e.g. GB'
+    category: Memsy.organization
+    type: string
+    default: ''
+  memsy.organization.defaultUsergroup:
+    label: 'Usergroup ID'
+    category: Memsy.organization
+    type: int
+    default: 0
+  memsy.organization.address.streetAndHouseNumber:
+    label: 'Street and house number'
+    category: Memsy.organization.address
+    type: string
+    default: ''
+  memsy.organization.address.city:
+    label: 'City'
+    category: Memsy.organization.address
+    type: string
+    default: ''
+  memsy.organization.address.zip:
+    label: 'Zip'
+    category: Memsy.organization.address
+    type: string
+    default: ''
+  memsy.organization.address.country:
+    label: 'Country'
+    category: Memsy.organization.address
+    type: string
+    default: ''
+  memsy.organization.paymentInformation.iban:
+      label: 'IBAN'
+      category: Memsy.organization.paymentInformation
+      type: string
+      default: ''
+  memsy.organization.paymentInformation.bic:
+      label: 'BIC'
+      category: Memsy.organization.paymentInformation
+      type: string
+      default: ''
+  memsy.organization.paymentInformation.sepaCreditorId:
+      label: 'SEPA creditor ID'
+      category: Memsy.organization.paymentInformation
+      type: string
+      default: ''
+  memsy.organization.paymentInformation.paymentReason:
+      label: 'Payment reason'
+      category: Memsy.organization.paymentInformation
+      type: string
+      default: ''
+  memsy.organization.paymentInformation.paymentDueMonth:
+      label: 'Payment due month'
+      category: Memsy.organization.paymentInformation
+      default: 'January'
+      type: string
+      enum:
+        1: 'January'
+        2: 'February'
+        3: 'March'
+        4: 'April'
+        5: 'May'
+        6: 'June'
+        7: 'July'
+        8: 'August'
+        9: 'September'
+        10: 'October'
+        11: 'November'
+        12: 'December'
+  memsy.organization.paymentInformation.paymentReminderPeriod:
+    label: 'Payment reminder period (when to send reminder emails; in DateInterval format)'
+    category: Memsy.organization.paymentInformation
+    type: string
+    default: 'P14D' # 14 days
+  memsy.organization.paymentInformation.paymentGracePeriod:
+    label: 'Payment grace period (when to create new payments before next payment due date; in DateInterval format)'
+    category: Memsy.organization.paymentInformation
+    type: string
+    default: 'P3M' # 3 months

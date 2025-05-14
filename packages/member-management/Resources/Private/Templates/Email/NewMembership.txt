@@ -1,6 +1,0 @@
-<f:layout name="SystemEmail" />
-<f:section name="Title"><f:translate key="email.newMembership.title" /></f:section>
-<f:section name="Main">,
-<f:translate key="email.newMembership.main.body.txt"/>
-<f:be.uri route="member_management" referenceType="share"/>
-</f:section>

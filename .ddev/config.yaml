@@ -1,28 +1,19 @@
-name: surfcamp-base-2025
-type: php
+name: typo3-ext-memsy
+type: typo3
 docroot: public
 php_version: "8.3"
 webserver_type: nginx-fpm
 xdebug_enabled: false
-additional_hostnames:
-    - surfcamp-base-2025-bootstrap
-    - surfcamp-base-2025-fcbigfoot
+additional_hostnames: []
 additional_fqdns: []
 database:
     type: mariadb
     version: "10.11"
 use_dns_when_possible: true
 composer_version: "2"
-web_environment: []
+web_environment:
+    - TYPO3_CONTEXT=Development/DDEV
 corepack_enable: false
-
-
-# Expose playwright UI ports
-web_extra_exposed_ports:
-  - name: playwright
-    container_port: 43837
-    http_port: 43837
-    https_port: 43834
 
 # Key features of DDEV's config.yaml:
 
@@ -288,3 +279,5 @@ web_extra_exposed_ports:
 # information on the commands that can be extended and the tasks you can define
 # for them. Example:
 #hooks:
+#  post-start:
+#    - exec: composer install -d /var/www/html

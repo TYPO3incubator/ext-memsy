@@ -1,0 +1,18 @@
+<f:layout name="SystemEmail" />
+<f:section name="Title"><f:translate key="email.membershipActivated.title" /></f:section>
+<f:section name="Main">
+<f:translate key="email.main.salutation" arguments="{0: '{member.firstName} {member.lastName}'}" />,
+<f:translate key="email.membershipActivated.main.body"/>
+<f:if condition="{member.sepaDebtorMandateSignDate}">
+<f:then>
+<f:translate key="email.membershipActivated.main.transfer"/>
+<f:translate key="payment-reason"/>: {sitesets.memsy.organization.paymentInformation.paymentReason}
+<f:translate key="payment-amount"/>: {member.membership.price -> f:format.currency(currencySign: '€')}
+<f:translate key="iban"/>: {sitesets.memsy.organization.paymentInformation.iban}
+<f:translate key="bic"/>: {sitesets.memsy.organization.paymentInformation.bic}
+</f:then>
+<f:else>
+<f:translate key="email.membershipActivated.main.sepa"/>
+</f:else>
+</f:if>
+</f:section>

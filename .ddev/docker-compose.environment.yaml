@@ -1,4 +1,0 @@
-services:
-  web:
-    environment:
-      - TYPO3_CONTEXT=Development
