@@ -58,6 +58,7 @@ final class MembershipService
         private readonly EmailService $emailService,
         private readonly HashService $hashService,
         private readonly LoggerInterface $logger,
+        private readonly PaymentService $paymentService,
         private readonly PersistenceManagerInterface $persistenceManager,
         private readonly MemberRepository $memberRepository,
     ) {
@@ -274,11 +275,14 @@ final class MembershipService
 
             $email->assign('sitesets', $this->getSiteSettings()->getAll());
 
+            // Create first payment
+            $this->paymentService->createPayment($member, true);
+
             try {
                 $this->emailService->sendEmail($email);
             } catch (TransportExceptionInterface $exception) {
                 $this->logger->error(
-                    'Error while sending new membership confirmatiomn mail: {message}',
+                    'Error while sending new membership activation mail: {message}',
                     ['message' => $exception->getMessage()],
                 );
             }
@@ -303,6 +307,7 @@ final class MembershipService
             $member->setMembershipStatus(MembershipStatus::Inactive);
             $member->setDisabled(true);
             $this->memberRepository->update($member);
+            $this->paymentService->cancelPendingPayments($member);
         }
         $this->persistenceManager->persistAll();
     }

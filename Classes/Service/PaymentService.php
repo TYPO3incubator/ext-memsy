@@ -156,6 +156,25 @@ final class PaymentService
         return $payment;
     }
 
+    public function cancelPendingPayments(Member $member): void
+    {
+        $hasChanges = false;
+
+        /** @var Payment $payment */
+        foreach ($member->getPayments() as $payment) {
+            if ($payment->getstate() === PaymentState::Pending) {
+                $payment->setState(PaymentState::Cancelled);
+                $hasChanges = true;
+
+                $this->persistenceManager->update($payment);
+            }
+        }
+
+        if ($hasChanges) {
+            $this->persistenceManager->persistAll();
+        }
+    }
+
     /**
      * @throws NotFoundExceptionInterface
      * @throws InvalidArgumentException
