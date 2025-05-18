@@ -23,3 +23,6 @@ jobs:
       # Validation
       - name: Validate composer.json
         run: composer validate --strict
+      - name: Validate PHP files
+        run: |
+          find . -type d \( -name .ddev -o -name config -o -name public -o -name var -o -name vendor \) -prune -false -o -type f -name '*.php' -print0 | xargs -0 -I{} php -l {}
