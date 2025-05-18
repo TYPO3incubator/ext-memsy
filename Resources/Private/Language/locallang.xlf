@@ -241,6 +241,9 @@
             <trans-unit id="error.unknown">
                 <source>An unknown error occurred. Please contact your person in charge.</source>
             </trans-unit>
+            <trans-unit id="error.dateOfBirth.tooYoung">
+                <source>You must be 18 years old to register as a new member.</source>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>
