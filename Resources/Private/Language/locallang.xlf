@@ -241,6 +241,10 @@
             <trans-unit id="error.unknown">
                 <source>An unknown error occurred. Please contact your person in charge.</source>
             </trans-unit>
+
+            <trans-unit id="passwordRequirements">
+                <source>The password must match the following requirements</source>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

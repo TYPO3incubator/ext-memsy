@@ -27,6 +27,7 @@ use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3Incubator\Memsy\Domain\Validator\IbanValidator;
+use TYPO3Incubator\Memsy\Domain\Validator\PasswordPolicyValidator;
 use TYPO3Incubator\Memsy\Domain\Validator\PasswordRepeatValidator;
 
 /**
@@ -106,6 +107,8 @@ class Member extends AbstractEntity
     protected ObjectStorage $payments;
 
     protected string $username = '';
+
+    #[Validate(['validator' => PasswordPolicyValidator::class])]
     protected string $password = '';
 
     #[Validate([

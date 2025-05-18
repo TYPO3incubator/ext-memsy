@@ -40,6 +40,7 @@ use TYPO3Incubator\Memsy\Domain\Model\MembershipStatus;
 use TYPO3Incubator\Memsy\Domain\Repository\MemberRepository;
 use TYPO3Incubator\Memsy\Domain\Repository\MembershipRepository;
 use TYPO3Incubator\Memsy\Exception\Exception;
+use TYPO3Incubator\Memsy\PasswordPolicy\MemberPasswordPolicyResolver;
 use TYPO3Incubator\Memsy\Service\MembershipService;
 
 /**
@@ -51,6 +52,7 @@ use TYPO3Incubator\Memsy\Service\MembershipService;
 final class MembershipController extends ActionController
 {
     public function __construct(
+        private readonly MemberPasswordPolicyResolver $passwordPolicyResolver,
         private readonly MemberRepository $memberRepository,
         private readonly MembershipRepository $membershipRepository,
         private readonly MembershipService $membershipService,
@@ -86,6 +88,7 @@ final class MembershipController extends ActionController
             'memberships' => $memberships,
             'sitesets' => $this->request->getAttribute('site')->getSettings()->getAll(),
             'data' => $this->getContentObjectData(),
+            'passwordRequirements' => $this->passwordPolicyResolver->getValidator()?->getRequirements(),
         ]);
 
         return $this->htmlResponse();
