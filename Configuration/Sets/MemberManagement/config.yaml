@@ -21,3 +21,7 @@ settings:
         sepaCreditorId: ''
         paymentReason: ''
         paymentDueMonth: ''
+        paymentReminderPeriod: ''
+        paymentGracePeriod: ''
+    membership:
+      minimumAgeInYears: ''

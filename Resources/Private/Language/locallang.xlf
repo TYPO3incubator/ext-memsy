@@ -242,7 +242,7 @@
                 <source>An unknown error occurred. Please contact your person in charge.</source>
             </trans-unit>
             <trans-unit id="error.dateOfBirth.tooYoung">
-                <source>You must be 18 years old to register as a new member.</source>
+                <source>You must be %d years old to register as a new member.</source>
             </trans-unit>
 
             <trans-unit id="passwordRequirements">

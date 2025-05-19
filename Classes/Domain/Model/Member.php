@@ -85,13 +85,8 @@ class Member extends AbstractEntity
 
     #[Validate(['validator' => 'NotEmpty'])]
     #[Validate(['validator' => 'DateTime'])]
-    #[Validate([
-        'validator' => DateIntervalValidator::class,
-        'options' => [
-            'interval' => 'P18Y', // 18 years
-            'message' => 'LLL:EXT:memsy/Resources/Private/Language/locallang.xlf:error.dateOfBirth.tooYoung',
-        ],
-    ])]
+    // Interval and message are set by MembershipController::initializeSaveAction
+    #[Validate(['validator' => DateIntervalValidator::class])]
     protected ?\DateTime $dateOfBirth = null;
 
     protected Gender $gender = Gender::NoSelection;
