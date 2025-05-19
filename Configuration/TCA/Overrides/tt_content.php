@@ -2,12 +2,13 @@
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use TYPO3Incubator\Memsy\Extension;
 
 defined('TYPO3') or die();
 
 (static function () {
     $createMembershipType = ExtensionUtility::registerPlugin(
-        'Memsy',
+        Extension::NAME,
         'CreateMembership',
         'LLL:EXT:memsy/Resources/Private/Language/locallang_db.xlf:plugins.create_membership.title',
         'status-user-frontend',
@@ -16,7 +17,7 @@ defined('TYPO3') or die();
     );
 
     ExtensionUtility::registerPlugin(
-        'Memsy',
+        Extension::NAME,
         'ConfirmMembership',
         'LLL:EXT:memsy/Resources/Private/Language/locallang_db.xlf:plugins.confirm_membership.title',
         'status-user-frontend',
@@ -25,7 +26,7 @@ defined('TYPO3') or die();
     );
 
     ExtensionUtility::registerPlugin(
-        'Memsy',
+        Extension::NAME,
         'MembershipSettings',
         'LLL:EXT:memsy/Resources/Private/Language/locallang_db.xlf:plugins.membership_settings.title',
         'status-user-frontend',

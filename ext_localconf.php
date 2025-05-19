@@ -3,11 +3,12 @@
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use TYPO3\CMS\Scheduler\Task\TableGarbageCollectionTask;
 use TYPO3Incubator\Memsy\Controller\MembershipController;
+use TYPO3Incubator\Memsy\Extension;
 
 defined('TYPO3') or die();
 
 ExtensionUtility::configurePlugin(
-    'Memsy',
+    Extension::NAME,
     'CreateMembership',
     [
         MembershipController::class => 'create, save',
@@ -19,7 +20,7 @@ ExtensionUtility::configurePlugin(
 );
 
 ExtensionUtility::configurePlugin(
-    'Memsy',
+    Extension::NAME,
     'ConfirmMembership',
     [
         MembershipController::class => 'confirm',
@@ -31,7 +32,7 @@ ExtensionUtility::configurePlugin(
 );
 
 ExtensionUtility::configurePlugin(
-    'Memsy',
+    Extension::NAME,
     'MembershipSettings',
     [
         MembershipController::class => 'edit, cancel',
