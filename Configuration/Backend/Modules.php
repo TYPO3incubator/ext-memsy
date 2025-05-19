@@ -9,6 +9,7 @@
  */
 
 use TYPO3Incubator\Memsy\Controller\BackendMemberController;
+use TYPO3Incubator\Memsy\Extension;
 
 return [
     'memsy_membermanagement' => [
@@ -18,7 +19,7 @@ return [
         'workspaces' => 'live',
         'labels' => 'LLL:EXT:memsy/Resources/Private/Language/locallang_mod_member.xlf',
         'navigationComponent' => '@typo3/backend/tree/page-tree-element',
-        'extensionName' => 'Memsy',
+        'extensionName' => Extension::NAME,
         'iconIdentifier' => 'tx-memsy-member-management-module',
         'controllerActions' => [
             BackendMemberController::class => [

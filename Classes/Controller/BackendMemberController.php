@@ -36,7 +36,7 @@ final class BackendMemberController extends ActionController
     private ModuleTemplate $moduleTemplate;
     private LanguageService $languageService;
 
-    protected const  string MEMBER_ACTION_SET_ACTIVE = 'setActive';
+    protected const string MEMBER_ACTION_SET_ACTIVE = 'setActive';
     protected const string MEMBER_ACTION_SET_INACTIVE = 'setInactive';
     protected const string MEMBER_ACTION_MARK_AS_PAID = 'markAsPaid';
 

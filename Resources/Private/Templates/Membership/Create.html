@@ -81,8 +81,21 @@
                 </f:for>
             </f:form.select>
         </div>
+
         <f:render partial="Input"
             arguments="{ type: 'password', id: 'password', name: 'password', required: true}" />
+
+        <f:if condition="{passwordRequirements}">
+            <f:render partial="Alert" arguments="{severity: 'light', additionalClasses: 'px-3 py-2 small'}" contentAs="content">
+                <f:translate key="passwordRequirements" />:
+                <ul class="list-chevron mb-0">
+                    <f:for each="{passwordRequirements}" as="requirement">
+                        <li>{requirement}</li>
+                    </f:for>
+                </ul>
+            </f:render>
+        </f:if>
+
         <f:render partial="Input"
             arguments="{ type: 'password', id: 'password-repeat', name: 'passwordRepeat', required: true}" />
     </fieldset>
