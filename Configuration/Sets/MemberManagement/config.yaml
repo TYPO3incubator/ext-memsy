@@ -9,6 +9,7 @@ settings:
       name: ''
       personInCharge: ''
       emailOfPersonInCharge: ''
+      defaultCountry: ''
       defaultUsergroup: 1
       address:
         streetAndHouseNumber: ''
@@ -21,3 +22,5 @@ settings:
         sepaCreditorId: ''
         paymentReason: ''
         paymentDueMonth: ''
+        paymentReminderPeriod: ''
+        paymentGracePeriod: ''
