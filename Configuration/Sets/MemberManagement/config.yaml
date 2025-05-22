@@ -24,3 +24,5 @@ settings:
         paymentDueMonth: ''
         paymentReminderPeriod: ''
         paymentGracePeriod: ''
+    membership:
+      minimumAgeInYears: ''

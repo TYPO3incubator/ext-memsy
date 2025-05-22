@@ -26,6 +26,7 @@ namespace TYPO3Incubator\Memsy\Domain\Model;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3Incubator\Memsy\Domain\Validator\DateIntervalValidator;
 use TYPO3Incubator\Memsy\Domain\Validator\IbanValidator;
 use TYPO3Incubator\Memsy\Domain\Validator\PasswordPolicyValidator;
 use TYPO3Incubator\Memsy\Domain\Validator\PasswordRepeatValidator;
@@ -84,6 +85,8 @@ class Member extends AbstractEntity
 
     #[Validate(['validator' => 'NotEmpty'])]
     #[Validate(['validator' => 'DateTime'])]
+    // Interval and message are set by MembershipController::initializeSaveAction
+    #[Validate(['validator' => DateIntervalValidator::class])]
     protected ?\DateTime $dateOfBirth = null;
 
     protected Gender $gender = Gender::NoSelection;

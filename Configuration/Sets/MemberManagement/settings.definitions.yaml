@@ -13,6 +13,9 @@ categories:
   Memsy.organization.paymentInformation:
     label: 'Payment information'
     parent: Memsy.organization
+  Memsy.membership:
+    label: 'Membership'
+    parent: Memsy
 
 settings:
   memsy.storage.membershipsFolderPid:
@@ -119,3 +122,8 @@ settings:
     category: Memsy.organization.paymentInformation
     type: string
     default: 'P3M' # 3 months
+  memsy.membership.minimumAgeInYears:
+    label: 'Minimum age of new members (in years)'
+    category: Memsy.membership
+    type: int
+    default: 18
