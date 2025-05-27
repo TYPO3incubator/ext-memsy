@@ -28,17 +28,22 @@ use Psr\Container\NotFoundExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Uid\Uuid;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashFactory;
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
+use TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator;
+use TYPO3\CMS\Extbase\Validation\Validator\ValidatorInterface;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3Incubator\Memsy\Domain\Model\Member;
 use TYPO3Incubator\Memsy\Domain\Model\MembershipStatus;
 use TYPO3Incubator\Memsy\Domain\Repository\MemberRepository;
 use TYPO3Incubator\Memsy\Domain\Repository\MembershipRepository;
+use TYPO3Incubator\Memsy\Domain\Validator\DateIntervalValidator;
+use TYPO3Incubator\Memsy\Domain\Validator\MemberObjectValidator;
 use TYPO3Incubator\Memsy\Exception\Exception;
 use TYPO3Incubator\Memsy\PasswordPolicy\MemberPasswordPolicyResolver;
 use TYPO3Incubator\Memsy\Service\MembershipService;
@@ -52,6 +57,7 @@ use TYPO3Incubator\Memsy\Service\MembershipService;
 final class MembershipController extends ActionController
 {
     public function __construct(
+        private readonly LanguageServiceFactory $languageServiceFactory,
         private readonly MemberPasswordPolicyResolver $passwordPolicyResolver,
         private readonly MemberRepository $memberRepository,
         private readonly MembershipRepository $membershipRepository,
@@ -96,8 +102,8 @@ final class MembershipController extends ActionController
 
     protected function initializeSaveAction(): void
     {
-        $this->arguments->getArgument('member')
-            ->getPropertyMappingConfiguration()
+        $argument = $this->arguments->getArgument('member');
+        $argument->getPropertyMappingConfiguration()
             ->forProperty('dateOfBirth')
             ->setTypeConverterOption(
                 DateTimeConverter::class,
@@ -105,6 +111,30 @@ final class MembershipController extends ActionController
                 'Y-m-d',
             )
         ;
+
+        $validator = $argument->getValidator();
+        $dateOfBirthValidator = $this->lookupDateOfBirthValidator($validator);
+
+        // Early return if date of birth validator is not configured
+        if ($dateOfBirthValidator === null) {
+            return;
+        }
+
+        // Get minimum age in years
+        $siteSettings = $this->request->getAttribute('site')->getSettings();
+        $minimumAgeInYears = (int)$siteSettings->get('memsy.membership.minimumAgeInYears', 18);
+        $languageService = $this->languageServiceFactory->createFromSiteLanguage(
+            $this->request->getAttribute('language'),
+        );
+
+        // Set validator option for date interval
+        $dateOfBirthValidator->setOptions([
+            'interval' => sprintf('P%dY', $minimumAgeInYears),
+            'message' => sprintf(
+                $languageService->sL('LLL:EXT:memsy/Resources/Private/Language/locallang.xlf:error.dateOfBirth.tooYoung'),
+                $minimumAgeInYears,
+            ),
+        ]);
     }
 
     protected function saveAction(Member $member): ResponseInterface
@@ -250,5 +280,34 @@ final class MembershipController extends ActionController
         }
 
         return $contentObject->data;
+    }
+
+    private function lookupDateOfBirthValidator(?ValidatorInterface $validator): ?DateIntervalValidator
+    {
+        if ($validator === null) {
+            return null;
+        }
+
+        if ($validator instanceof ConjunctionValidator) {
+            foreach ($validator->getValidators() as $currentValidator) {
+                $dateOfBirthValidator = $this->lookupDateOfBirthValidator($currentValidator);
+
+                if ($dateOfBirthValidator !== null) {
+                    return $dateOfBirthValidator;
+                }
+            }
+        }
+
+        if ($validator instanceof MemberObjectValidator) {
+            $dateOfBirthValidators = $validator->getPropertyValidators('dateOfBirth');
+
+            foreach ($dateOfBirthValidators as $dateOfBirthValidator) {
+                if ($dateOfBirthValidator instanceof DateIntervalValidator) {
+                    return $dateOfBirthValidator;
+                }
+            }
+        }
+
+        return null;
     }
 }
